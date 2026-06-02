@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>暴龍改造者調查團 - 參與人員報名表單</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1a7fd4;
+    --dark-blue: #0d4f8a;
+    --light-blue: #5bb8f5;
+    --cyan: #00e5ff;
+    --yellow: #f5d020;
+    --red: #e63946;
+    --bg: #0a0e1a;
+    --card: #0f1830;
+    --border: #1e3a6e;
+    --text: #cce6ff;
+    --muted: #5a7fa8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(26,127,212,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(0,229,255,0.08) 0%, transparent 50%);
+  }
+
+  .snow {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .flake {
+    position: absolute;
+    top: -10px;
+    width: 6px; height: 6px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh) translateX(30px); opacity: 0; }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeDown 0.8s ease both;
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--yellow), #ff9800);
+    color: #1a0a00;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    box-shadow: 0 0 20px rgba(245,208,32,0.4);
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(22px, 5vw, 36px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+    text-shadow: 0 0 30px rgba(91,184,245,0.6);
+    letter-spacing: 2px;
+  }
+  h1 span { color: var(--cyan); }
+
+  .subtitle {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .mascot-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(135deg, rgba(26,127,212,0.2), rgba(0,229,255,0.08));
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--cyan);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .mascot-icon { width: 54px; height: 54px; flex-shrink: 0; }
+
+  .speech { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .speech strong { color: var(--cyan); }
+
+  .form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 32px;
+    animation: fadeUp 0.8s 0.4s ease both;
+    box-shadow: 0 0 60px rgba(26,127,212,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin: 28px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+  .section-title:first-child { margin-top: 0; }
+
+  .field { margin-bottom: 20px; }
+
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--light-blue);
+    margin-bottom: 7px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  label .req { color: var(--red); margin-left: 3px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--cyan);
+    background: rgba(0,229,255,0.05);
+    box-shadow: 0 0 0 3px rgba(0,229,255,0.1);
+  }
+  select option { background: #0f1830; }
+  textarea { resize: vertical; min-height: 90px; }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 500px) { .row { grid-template-columns: 1fr; } }
+
+  .radio-group, .check-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .radio-group label, .check-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 400;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .radio-group label:hover, .check-group label:hover {
+    border-color: var(--light-blue);
+    background: rgba(91,184,245,0.08);
+  }
+  .radio-group input[type="radio"],
+  .check-group input[type="checkbox"] {
+    width: auto;
+    accent-color: var(--cyan);
+  }
+
+  .submit-btn {
+    width: 100%;
+    margin-top: 32px;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--blue), var(--dark-blue));
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(26,127,212,0.4);
+  }
+  .submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+    transition: left 0.5s;
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,127,212,0.5); }
+  .submit-btn:hover::before { left: 100%; }
+  .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  /* Loading spinner */
+  .spinner {
+    display: inline-block;
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Error message */
+  .error-msg {
+    display: none;
+    background: rgba(230,57,70,0.15);
+    border: 1px solid var(--red);
+    border-radius: 8px;
+    color: #ff8a8a;
+    font-size: 13px;
+    padding: 12px 16px;
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  .success-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,14,26,0.95);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 40px;
+  }
+  .success-overlay.show { display: flex; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .success-icon {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin-bottom: 24px;
+    box-shadow: 0 0 60px rgba(0,229,255,0.4);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 40px rgba(0,229,255,0.4); }
+    50% { box-shadow: 0 0 80px rgba(0,229,255,0.7); }
+  }
+  .success-overlay h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    color: var(--cyan);
+    margin-bottom: 12px;
+  }
+  .success-overlay p { color: var(--muted); font-size: 14px; max-width: 360px; line-height: 1.7; }
+  .success-overlay .num {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    padding: 4px 14px;
+    border-radius: 20px;
+  }
+
+  .hint { font-size: 11px; color: var(--muted); margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<div class="snow" id="snow"></div>
+
+<div class="container">
+  <div class="header">
+    <div class="badge">🔍 機密調查任務</div>
+    <h1>暴龍改造者<br><span>調查團</span></h1>
+    <p class="subtitle">VEEMON MODIFIED INVESTIGATION CORPS · 報名表單</p>
+  </div>
+
+  <div class="mascot-bar">
+    <svg class="mascot-icon" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="27" cy="30" r="18" fill="#1a7fd4"/>
+      <ellipse cx="27" cy="38" rx="12" ry="6" fill="#cce6ff"/>
+      <ellipse cx="21" cy="27" rx="5" ry="6" fill="#8b0000"/>
+      <ellipse cx="33" cy="27" rx="5" ry="6" fill="#8b0000"/>
+      <circle cx="21" cy="26" r="2" fill="#000"/>
+      <circle cx="33" cy="26" r="2" fill="#000"/>
+      <circle cx="22" cy="25" r="1" fill="#fff"/>
+      <circle cx="34" cy="25" r="1" fill="#fff"/>
+      <polygon points="17,18 20,24 23,18" fill="#f5d020"/>
+      <polygon points="31,18 34,24 37,18" fill="#f5d020"/>
+      <polygon points="12,20 8,10 18,16" fill="#1a7fd4"/>
+      <polygon points="42,20 46,10 36,16" fill="#1a7fd4"/>
+    </svg>
+    <div class="speech">
+      <strong>你們知道暴龍改造者在什麼地方嗎？</strong><br>
+      加入調查團，一起追查暴龍改造者的下落！<br>請填寫以下報名資料，任務成功就靠你了！
+    </div>
+  </div>
+
+  <div class="form-card">
+    <form id="mainForm" onsubmit="handleSubmit(event)">
+
+      <div class="section-title">基本資料</div>
+
+      <div class="row">
+        <div class="field">
+          <label>調查員代號 <span class="req">*</span></label>
+          <input id="f_code" type="text" placeholder="例：BlueV-001" required>
+        </div>
+        <div class="field">
+          <label>真實姓名 <span class="req">*</span></label>
+          <input id="f_name" type="text" placeholder="您的姓名" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>電子郵件 <span class="req">*</span></label>
+          <input id="f_email" type="email" placeholder="mail@example.com" required>
+        </div>
+        <div class="field">
+          <label>聯絡電話</label>
+          <input id="f_phone" type="tel" placeholder="09xx-xxx-xxx">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>年齡</label>
+        <div class="radio-group">
+          <label><input type="radio" name="age" value="未滿12歲"> 未滿12歲</label>
+          <label><input type="radio" name="age" value="12–17歲"> 12–17歲</label>
+          <label><input type="radio" name="age" value="18–30歲"> 18–30歲</label>
+          <label><input type="radio" name="age" value="30歲以上"> 30歲以上</label>
+        </div>
+      </div>
+
+      <div class="section-title">調查員能力</div>
+
+      <div class="field">
+        <label>數碼世界經驗 <span class="req">*</span></label>
+        <select id="f_level" required>
+          <option value="" disabled selected>請選擇</option>
+          <option>新兵（從未接觸）</option>
+          <option>訓練生（略有了解）</option>
+          <option>正式調查員（熟悉數碼獸）</option>
+          <option>資深偵探（有豐富戰鬥經驗）</option>
+          <option>傳說中的馴獸師</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>具備的技能（可複選）</label>
+        <div class="check-group" id="f_skills">
+          <label><input type="checkbox" value="情報收集"> 情報收集</label>
+          <label><input type="checkbox" value="數碼世界導航"> 數碼世界導航</label>
+          <label><input type="checkbox" value="數碼獸溝通"> 數碼獸溝通</label>
+          <label><input type="checkbox" value="戰鬥支援"> 戰鬥支援</label>
+          <label><input type="checkbox" value="醫療救護"> 醫療救護</label>
+          <label><input type="checkbox" value="科技駭客"> 科技駭客</label>
+          <label><input type="checkbox" value="偽裝滲透"> 偽裝滲透</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>拍檔數碼獸名稱（如有）</label>
+        <input id="f_partner" type="text" placeholder="例：V型獸、海龍獸...">
+      </div>
+
+      <div class="section-title">任務參與意願</div>
+
+      <div class="field">
+        <label>可出勤時段（可複選）</label>
+        <div class="check-group" id="f_schedule">
+          <label><input type="checkbox" value="平日白天"> 平日白天</label>
+          <label><input type="checkbox" value="平日晚間"> 平日晚間</label>
+          <label><input type="checkbox" value="週末全天"> 週末全天</label>
+          <label><input type="checkbox" value="緊急召集隨時待命"> 緊急召集隨時待命</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>參與動機 <span class="req">*</span></label>
+        <select id="f_motivation" required>
+          <option value="" disabled selected>請選擇主要動機</option>
+          <option>保護數碼世界</option>
+          <option>追查暴龍改造者真相</option>
+          <option>守護拍檔數碼獸</option>
+          <option>對調查工作有興趣</option>
+          <option>受朋友邀請</option>
+        </select>
+      </div>
+
+      <div class="field" style="margin-top:8px;">
+        <div class="check-group">
+          <label style="font-size:12px; color:var(--muted);">
+            <input type="checkbox" required>
+            我了解此任務存在風險，自願加入暴龍改造者調查團，並遵守團隊守則。
+          </label>
+        </div>
+      </div>
+
+      <div class="error-msg" id="errorMsg">⚠️ 提交失敗，請稍後再試。</div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">⚡ 提交報名 · 加入調查 ⚡</button>
+    </form>
+  </div>
+</div>
+
+<div class="success-overlay" id="successOverlay">
+  <div class="success-icon">✓</div>
+  <h2>報名成功！</h2>
+  <p>歡迎加入<strong style="color:var(--cyan)">暴龍改造者調查團</strong>！<br>您的資料已送入調查總部，調查團長將盡快與您聯繫，請保持警戒！</p>
+  <div class="num" id="caseNum">調查員編號：--</div>
+  <p style="margin-top:20px; font-size:12px; color:var(--muted);">任務開始 · 數碼世界的和平有賴您的守護</p>
+</div>
+
+<script>
+  // Snow
+  const snow = document.getElementById('snow');
+  for (let i = 0; i < 30; i++) {
+    const f = document.createElement('div');
+    f.className = 'flake';
+    f.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${Math.random() * 5 + 3}px;
+      height: ${Math.random() * 5 + 3}px;
+      animation-duration: ${Math.random() * 6 + 6}s;
+      animation-delay: ${Math.random() * 8}s;
+      opacity: ${Math.random() * 0.5 + 0.3};
+    `;
+    snow.appendChild(f);
+  }
+
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzOrKHeNFY7FmudClbFynB8OSCIbHxOxn7RVT7Ebob85gE0ohSjCQp7iNDBeXM0lWrcUA/exec';
+
+  function getChecked(groupId) {
+    return Array.from(document.querySelectorAll(`#${groupId} input:checked`))
+      .map(cb => cb.value).join('、');
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    errorMsg.style.display = 'none';
+
+    // Collect data
+    const data = {
+      code:       document.getElementById('f_code').value.trim(),
+      name:       document.getElementById('f_name').value.trim(),
+      email:      document.getElementById('f_email').value.trim(),
+      phone:      document.getElementById('f_phone').value.trim(),
+      age:        (document.querySelector('input[name="age"]:checked') || {}).value || '',
+      level:      document.getElementById('f_level').value,
+      skills:     getChecked('f_skills'),
+      partner:    document.getElementById('f_partner').value.trim(),
+      schedule:   getChecked('f_schedule'),
+      motivation: document.getElementById('f_motivation').value,
+    };
+
+    // Loading state
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>傳送中...';
+
+    // 用 JSONP 方式送出，繞過 CORS 限制
+    const params = new URLSearchParams();
+    Object.entries(data).forEach(([k, v]) => params.append(k, v));
+    const callbackName = 'cb_' + Date.now();
+    params.append('callback', callbackName);
+
+    const timeout = setTimeout(() => {
+      errorMsg.style.display = 'block';
+      btn.disabled = false;
+      btn.innerHTML = '⚡ 提交報名 · 加入調查 ⚡';
+      delete window[callbackName];
+      script.remove();
+    }, 10000);
+
+    window[callbackName] = function(response) {
+      clearTimeout(timeout);
+      delete window[callbackName];
+      script.remove();
+      if (response && response.status === 'success') {
+        const num = 'VIC-' + String(Math.floor(Math.random() * 9000) + 1000);
+        document.getElementById('caseNum').textContent = '調查員編號：' + num;
+        document.getElementById('successOverlay').classList.add('show');
+      } else {
+        errorMsg.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = '⚡ 提交報名 · 加入調查 ⚡';
+      }
+    };
+
+    const script = document.createElement('script');
+    script.src = SCRIPT_URL + '?' + params.toString();
+    document.body.appendChild(script);
+  }
+</script>
+</body>
+</html>
